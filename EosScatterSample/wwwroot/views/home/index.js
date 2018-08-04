@@ -36,6 +36,9 @@ component.methods = {
                     self.eos = scatter.eos(self.network, Eos.Localnet, {}, "http");
                     self.requiredFields = { accounts: [self.network] };
                 });
+            })
+            .catch(err => {
+                app.notification('error', 'Scatter初始化失败', err.toString());
             });
     },
     hello: function () {
