@@ -19,9 +19,9 @@ component.methods = {
         }
 
         var self = this;
-        qv.get('http://127.0.0.1:8888/v1/chain/get_info')
+        qv.get('/api/chain/id')
             .then(x => {
-                self.chainId = x.chain_id;
+                self.chainId = x.data;
                 self.network = {
                     blockchain: 'eos',
                     host: '127.0.0.1',
