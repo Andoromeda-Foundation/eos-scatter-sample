@@ -154,6 +154,7 @@ pre {
 
 .form-label {
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .form-input {
@@ -255,4 +256,15 @@ pre {
 .eos-status {
     color: #fff;
     text-align: center;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: 2px solid #fff;
+    color: #fff;
+    background: none;
+}
+
+hr {
+    margin: 30px 0;
 }

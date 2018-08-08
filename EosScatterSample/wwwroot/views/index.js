@@ -5,7 +5,12 @@
             currentNotification: null,
             notifications: [],
             notificationLock: false
-        }
+        },
+        requiredFields: null,
+        eos: null,
+        network: null,
+        account: null,
+        chainId: null
     },
     created: function () {
     },
@@ -68,6 +73,34 @@
                     self._showNotification();
                 }
             }, 250);
+        },
+        init_scatter: function () {
+            if (!('scatter' in window)) {
+                app.notification('important', '没有找到Scatter', 'Scatter是一款EOS的Chrome插件，运行本例程需要使用Chrome并安装Scatter插件。', '我知道了');
+            }
+
+            var self = this;
+            qv.get('/api/chain/id')
+                .then(x => {
+                    self.chainId = x.data;
+                    self.network = {
+                        blockchain: 'eos',
+                        host: '127.0.0.1',
+                        port: 8888,
+                        protocol: 'http',
+                        chainId: self.chainId,
+                        verbose: true,
+                        debug: true
+                    };
+                    scatter.getIdentity({ accounts: [self.network] }).then(identity => {
+                        self.account = identity.accounts.find(acc => acc.blockchain === 'eos');
+                        self.eos = scatter.eos(self.network, Eos.Localnet, {}, "http");
+                        self.requiredFields = { accounts: [self.network] };
+                    });
+                })
+                .catch(err => {
+                    app.notification('error', 'Scatter初始化失败', err.toString());
+                });
         },
     },
     computed: {
