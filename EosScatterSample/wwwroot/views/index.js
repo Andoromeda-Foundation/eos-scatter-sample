@@ -94,7 +94,7 @@
                     };
                     scatter.getIdentity({ accounts: [self.network] }).then(identity => {
                         self.account = identity.accounts.find(acc => acc.blockchain === 'eos');
-                        self.eos = scatter.eos(self.network, Eos.Localnet, {}, "http");
+                        self.eos = scatter.eos(self.network, Eos, {});
                         self.requiredFields = { accounts: [self.network] };
                     });
                 })
