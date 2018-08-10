@@ -13,7 +13,7 @@ component.methods = {
         app.notification('pending', '正在调用hello合约');
         var requiredFields = app.requiredFields;
         app.eos.contract('hello', { requiredFields }).then(contract => {
-            return contract.hi('hello', { authorization: ["hello@active"] });
+            return contract.hi(app.account.name, { authorization: [`${app.account.name}@${app.account.authority}`] });
         })
         .then(() => {
             app.notification('succeeded', 'hello合约调用成功');
@@ -26,7 +26,7 @@ component.methods = {
         app.notification('pending', '正在调用counter_init合约');
         var requiredFields = app.requiredFields;
         app.eos.contract('counter', { requiredFields }).then(contract => {
-            return contract.init('counter', { authorization: ["counter@active"] });
+            return contract.init(app.account.name, { authorization: [`${app.account.name}@${app.account.authority}`] });
         })
         .then(() => {
             app.notification('succeeded', 'counter_init合约调用成功');
@@ -39,7 +39,7 @@ component.methods = {
         app.notification('pending', '正在调用counter_add合约');
         var requiredFields = app.requiredFields;
         app.eos.contract('counter', { requiredFields }).then(contract => {
-            return contract.add('counter', { authorization: ["counter@active"] });
+            return contract.add(app.account.name, { authorization: [`${app.account.name}@${app.account.authority}`] });
         })
             .then(() => {
                 app.notification('succeeded', 'counter_add合约调用成功');
