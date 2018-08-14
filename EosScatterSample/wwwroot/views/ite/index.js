@@ -1,15 +1,29 @@
 ﻿component.data = function () {
     return {
         buy_amount: "1.0000 SATOKO",
-        sell_amount: 0
+        sell_amount: 0,
+        balances: []
     };
 };
 
 component.created = function () {
-    
+    setInterval(() => {
+        try {
+            this.getBalance();
+        } catch (ex) {
+        }
+    }, 5000);
 };
 
 component.methods = {
+    getBalance: function () {
+        if (app.account.name) {
+            var self = this;
+            app.eos.getCurrencyBalance('eosio.token', 'itegame').then(x => {
+                self.balances = x;
+            });
+        }
+    },
     getPublicKey: function () {
         return qv.get(`/api/chain/account/${app.account.name}/perm/${app.account.authority}`, {}).then(x => {
             return Promise.resolve(x.data);
