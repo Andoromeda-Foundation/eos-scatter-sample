@@ -1,6 +1,7 @@
 ﻿LazyRouting.SetRoute({
     '/home': null,
-    '/ite': null
+    '/ite': null,
+    '/eosio': null
 });
 
 LazyRouting.SetMirror({

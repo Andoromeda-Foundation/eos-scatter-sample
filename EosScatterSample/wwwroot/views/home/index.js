@@ -9,6 +9,9 @@ component.methods = {
     ite: function () {
         app.redirect("/ite");
     },
+    eosio: function () {
+        app.redirect("/eosio");
+    },
     hello: function () {
         app.notification('pending', '正在调用hello合约');
         var requiredFields = app.requiredFields;
