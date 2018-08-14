@@ -19,7 +19,7 @@ component.methods = {
     getBalance: function () {
         if (app.account.name) {
             var self = this;
-            app.eos.getCurrencyBalance('eosio.token', 'itegame').then(x => {
+            app.eos.getCurrencyBalance('eosio.token', app.account.name).then(x => {
                 self.balances = x;
             });
         }
