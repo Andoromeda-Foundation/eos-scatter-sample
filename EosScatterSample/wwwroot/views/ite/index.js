@@ -1,6 +1,6 @@
 ﻿component.data = function () {
     return {
-        buy_amount: "1.0000 SATOKO",
+        buy_amount: "1.0000 SYS",
         sell_amount: 0,
         balances: []
     };
@@ -69,7 +69,7 @@ component.methods = {
                 var requiredFields = app.requiredFields;
                 app.eos.contract('itegame', { requiredFields }).then(contract => {
                     console.warn(amount);
-                    return contract.buy(app.account.name, amount, { authorization: [`${app.account.name}@${app.account.authority}`] });
+                    return contract.transfer(app.account.name, 'itegame', amount, 'MEMO', { authorization: [`${app.account.name}@${app.account.authority}`] });
                 })
                 .then(() => {
                     app.notification('succeeded', 'itegame_buy合约调用成功');
