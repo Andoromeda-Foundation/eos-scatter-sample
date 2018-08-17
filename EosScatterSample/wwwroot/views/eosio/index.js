@@ -1,8 +1,9 @@
 ﻿component.data = function () {
     return {
-        amount: "1.0000 SATOKO",
-        to: null,
-        balances: []
+        amount: "1.0000 EOS",
+        to: "itegame",
+        balances: [],
+        hodl: 0
     };
 };
 
@@ -10,6 +11,7 @@ component.created = function () {
     setInterval(() => {
         try {
             this.getBalance();
+            this.getHodl();
         } catch (ex) {
         }
     }, 5000);
@@ -21,6 +23,16 @@ component.methods = {
             var self = this;
             app.eos.getCurrencyBalance('eosio.token', app.account.name).then(x => {
                 self.balances = x;
+            });
+        }
+    },
+    getHodl: function () {
+        if (app.account.name) {
+            var self = this;
+            app.eos.getTableRows(true, 'itegame', app.account.name, 'userinfo').then(x => {
+                if (x.rows.length) {
+                    self.hodl = x.rows[0].hodl;
+                }
             });
         }
     },

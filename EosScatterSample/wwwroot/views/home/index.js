@@ -1,4 +1,6 @@
 ﻿component.data = function () {
+    return {
+    };
 };
 
 component.created = function () {
