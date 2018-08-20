@@ -14,6 +14,9 @@ component.methods = {
     eosio: function () {
         app.redirect("/eosio");
     },
+    exchange: function () {
+        app.redirect("/exchange");
+    },
     hello: function () {
         app.notification('pending', '正在调用hello合约');
         var requiredFields = app.requiredFields;
