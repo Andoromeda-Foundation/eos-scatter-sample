@@ -2,7 +2,8 @@
     return {
         total: 0,
         asset: "10.0000 POM",
-        balances: []
+        balances: [],
+        trades: []
     };
 };
 
@@ -12,10 +13,25 @@ component.created = function () {
             this.getBalance();
         } catch (ex) {
         }
+        try {
+            this.getTrades();
+        } catch (ex) {
+        }
     }, 5000);
 };
 
 component.methods = {
+    getTrades: function () {
+        var self = this;
+        app.eos.getTableRows({
+            code: 'pomelo',
+            scope: 'pomelo',
+            table: 'trade',
+            json: true,
+        }).then(data => {
+            self.trades = data.rows;
+        });
+    },
     getBalance: function () {
         if (app.account.name) {
             var self = this;

@@ -13,6 +13,26 @@
     </div>
     <br />
     <div>
+        <div class="form-label">交易列表</div>
+        <table class="table">
+            <tr>
+                <td>ACCOUNT</td>
+                <td>ASSET</td>
+                <td>PRICE</td>
+                <td>STATUS</td>
+            </tr>
+            <tr v-for="x in trades">
+                <td>{{ x.account }}</td>
+                <td>{{ x.asset }}</td>
+                <td>{{ (x.total_eos / 10000.0).toFixed(4) }} EOS</td>
+                <td v-if="x.status === 0">求购</td>
+                <td v-if="x.status === 1">出售</td>
+                <td v-if="x.status === 2">已完成</td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div>
         <div class="form-label">Asset</div>
         <div class="form-label"><input class="textbox" v-model="asset" /></div>
         <div class="form-label">总价 (单位: EOS)</div>
