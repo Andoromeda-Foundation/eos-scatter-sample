@@ -21,13 +21,17 @@
                 <td>PRICE</td>
                 <td>STATUS</td>
             </tr>
-            <tr v-for="x in trades">
+            <tr v-for="x in buys">
                 <td>{{ x.account }}</td>
                 <td>{{ x.asset }}</td>
                 <td>{{ (x.total_eos / 10000.0).toFixed(4) }} EOS</td>
-                <td v-if="x.status === 0">求购</td>
-                <td v-if="x.status === 1">出售</td>
-                <td v-if="x.status === 2">已完成</td>
+                <td>求购</td>
+            </tr>
+            <tr v-for="x in sells">
+                <td>{{ x.account }}</td>
+                <td>{{ x.asset }}</td>
+                <td>{{ (x.total_eos / 10000.0).toFixed(4) }} EOS</td>
+                <td>出售</td>
             </tr>
         </table>
     </div>

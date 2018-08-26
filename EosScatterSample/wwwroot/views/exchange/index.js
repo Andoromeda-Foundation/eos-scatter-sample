@@ -1,9 +1,10 @@
 ﻿component.data = function () {
     return {
-        total: 0,
+        total: 100000,
         asset: "10.0000 POM",
         balances: [],
-        trades: []
+        buys: [],
+        sells: []
     };
 };
 
@@ -26,10 +27,19 @@ component.methods = {
         app.eos.getTableRows({
             code: 'pomelo',
             scope: 'pomelo',
-            table: 'trade',
+            table: 'sellrecord',
             json: true,
         }).then(data => {
-            self.trades = data.rows;
+            self.sells = data.rows;
+        });
+
+        app.eos.getTableRows({
+            code: 'pomelo',
+            scope: 'pomelo',
+            table: 'buyrecord',
+            json: true,
+        }).then(data => {
+            self.buys = data.rows;
         });
     },
     getBalance: function () {
